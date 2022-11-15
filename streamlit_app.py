@@ -5,4 +5,4 @@ features = st.container()
 modelTraining = st.container()
 
 with header:
-    st.Title("Comparador de imagens")
+    st.title("Comparador de imagens")
