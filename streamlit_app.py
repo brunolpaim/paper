@@ -32,10 +32,10 @@ with corpo:
         ''')
 
 with dataset:
-    st.Title("Datasets")
+    st.title("Datasets")
 
 with features:
-    st.Title("Features")
+    st.title("Features")
 
 with model_training:
-    st.Title("Treinando o modelo")
+    st.title("Treinando o modelo")
