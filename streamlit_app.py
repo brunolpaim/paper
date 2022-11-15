@@ -39,4 +39,3 @@ with features:
 
 with model_training:
     st.Title("Treinando o modelo")
-    main()
