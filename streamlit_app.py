@@ -29,7 +29,7 @@ with corpo:
             Em seguida, como a aplicação não é capaz de garantir que a entrada das imagens seja em
             Preto-e-Branco, é feita a conversão através da função cv::cvtColor(), da biblioteca OpenCV.
             É usado o argumento COLOR_BGR2GRAY para especificar que a queremos em P&B.
-            ''')
+        ''')
 
 with dataset:
     st.Title("Datasets")
