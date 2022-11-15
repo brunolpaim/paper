@@ -1,4 +1,3 @@
-pip install streamlit -q
 %%writefile app.py
 import streamlit as st
 import cv2
