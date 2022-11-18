@@ -18,7 +18,7 @@ def load_image2(up_streamlit_img2):
 def main():
     st.title("PROJETO I – APLICAÇÃO DE MÉTODOS DE APRENDIZAGEM DE LINGUAGEM DE MÁQUINA")
 
-    menu = ["Apresentação","Dist. de Bhattacharyya", "Modelo de predição", "Algoritmo 3"]
+    menu = ["Apresentação","Comparador de Imagens", "Modelo de predição com Machine Learning I", "Modelo de predição com Machine Learning II", "Considerações"]
     escolha = st.sidebar.selectbox("Menu", menu)
 
     if escolha == "Apresentação":
@@ -41,38 +41,39 @@ def main():
             Documentação, Gerenciamento de tempo e tarefas, historytelling
         ''')
         
-        st.image('meme.png', caption='Como o cerebro de um dev funciona kkk')
+        st.image('meme.png', caption='Legenda: "Como o cerebro de um dev funciona" ')
         
-       
-        
-    
-    elif escolha == "Dist. de Bhattacharyya":
+    elif escolha == "Comparador de Imagens":
 
         st.header('Comparador de imagens por histogramas e distância de Bhattacharyya')
         st.subheader('Introdução')
         st.text('''
-              Esta aplicação analisa e compara imagens de medições médicas baseada
-              em mecanismo semelhante ao do olho humano, por suas cores,
-              iluminação e saturação.
-              Como se tratam de imagens produzidas através da medição
-              de sinais do corpo humano, neste caso foi simplificada a comparação 
-              para imagens em Preto-e-Branco
-              - pois asim são geradas nos dispositivos médicos -, com o sinal mais forte
-              tendendo ao branco e o mais fraco, ao preto.
-              Isto simplifica a comparação a apenas um canal, ao invés de 3,
-              conforme mencionado.
-              A variável correspondente nesta simplificação é, no caso, a iluminação.
-              As imagens são então comparadas usando o método "distância de Bhattacharyya".              
+              Esta aplicação analisa e compara imagens para auxiliar nas comparações de exames 
+              médicos e é baseada no mecanismo semelhante ao do olho humano, com identificação 
+              por cores, iluminação e saturação.
+              
+              Esse método específico foi pensado para que seja possível simular o mesmo que 
+              um humano normal pode identificar, além de auxiliar médicos que tenham deficiências visuais.
+              
+              O método utlizado consiste em transformar os dados de imagens em cores para imagens
+              em escala de preto e branco, dessa forma a máquina aumenta o grau de precisão para 
+              análise de tumores identificáveis.
+              
+              Isto simplifica a comparação pois trabalha apenas com variações de tons de cinza e então 
+              as imagens são então comparadas usando o método "distância de Bhattacharyya".              
             ''')
 
-        st.subheader('Uso e funcionamento do código')
+        st.subheader('Uso da aplicação')
         st.text('''
-            A aplicação aguarda até que sejam preenchidas as imagens 1 e 2 a serem comparadas.
-            Há botões de inclusão de imagens abaixo na página.
+            A aplicação aguarda até 5 minutos para que sejam preenchidas as imagens 1 e 2 a serem comparadas.
+            Há botões de inserção de imagens abaixo na página.
+            
             Internamente, estas imagens são armazenadas em variáveis do tipo array.
+            
             Em seguida, como a aplicação não é capaz de garantir que a entrada das imagens
-            seja em Preto-e-Branco, é feita a conversão através da função cv::cvtColor(),
-            da biblioteca OpenCV.
+            seja em preto-e-branco, é feita a conversão através da função cv::cvtColor(),
+            da biblioteca OpenCV (opencv-python-headless==4.6.0.66).
+            
             É usado o argumento COLOR_BGR2GRAY para especificar que a queremos em P&B.
             ''')
 
@@ -218,7 +219,7 @@ def main():
         metric_val = cv2.compareHist(hist_img1, hist_img2, cv2.HISTCMP_BHATTACHARYYA)
         st.write("Caso o valor seja próximo a 0.0 pode-se considerar as imagens iguais!\nQuanto mais próximo de 1, menor a relação.\n\n Resultado: {0:.2f}\n".format(metric_val))
 
-    elif escolha == "Modelo de predição":
+    elif escolha == "Modelo de predição com Machine Learning I":
         st.title('ENTREGAS DA ETAPA I')
         st.subheader('DEFINIÇÃO DO TEMA: Área de Medicina – Neurologia')
         st.subheader('OBJETIVO: Auxílio no Diagnóstico por Imagem de Tumores Cerebrais')
@@ -530,8 +531,10 @@ def plot_dataset_predictions(dataset):
         '''
         st.code(saving_root, language='python')
         
-    elif escolha == "Algoritmo 3":
-        st.write("algo3")
+    elif escolha == "Modelo de predição com Machine Learning II":
+        st.write("Algoritmo de predição com 16 camadas de aprendizagem")
+    elif escolha == "Considerações":
+        st.write("Considerações")
     else:
         st.subheader('About')
 
