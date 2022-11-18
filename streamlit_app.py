@@ -1,5 +1,5 @@
 import streamlit as st
-import cv2
+import opencv-python-headless as cv2
 import time
 import numpy as np
 from PIL import Image
