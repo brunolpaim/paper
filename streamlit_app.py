@@ -14,6 +14,8 @@ def load_image2(up_streamlit_img2):
     img2 = Image.open(up_streamlit_img2)
     return img2
 
+video_file = open('https://youtu.be/T8pFLv1LSoY', 'rb')
+video_bytes = video_file.read()
 
 def main():
     st.title("PROJETO I – APLICAÇÃO DE MÉTODOS DE APRENDIZAGEM DE LINGUAGEM DE MÁQUINA")
@@ -43,9 +45,6 @@ def main():
         
         st.image('meme.png', caption='Legenda: "Como o cerebro de um dev funciona" ')
         
-        video_file = open('https://youtu.be/T8pFLv1LSoY', 'rb')
-        video_bytes = video_file.read()
-
         st.video(video_bytes)
         
     elif escolha == "Modelo 0 - Comparador de Imagens":
