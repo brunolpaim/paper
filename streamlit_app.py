@@ -18,7 +18,7 @@ def load_image2(up_streamlit_img2):
 def main():
     st.title("PROJETO I – APLICAÇÃO DE MÉTODOS DE APRENDIZAGEM DE LINGUAGEM DE MÁQUINA")
 
-    menu = ["Apresentação","Comparador de Imagens", "Modelo I - Machine Learning", "Modelo II - Machine Learning", "Considerações"]
+    menu = ["Apresentação","Modelo 0 - Comparador de Imagens", "Modelo I - Machine Learning", "Modelo II - Machine Learning", "Considerações"]
     escolha = st.sidebar.selectbox("Menu", menu)
 
     if escolha == "Apresentação":
@@ -43,7 +43,7 @@ def main():
         
         st.image('meme.png', caption='Legenda: "Como o cerebro de um dev funciona" ')
         
-    elif escolha == "Comparador de Imagens":
+    elif escolha == "Modelo 0 - Comparador de Imagens":
 
         st.header('Comparador de imagens por histogramas e distância de Bhattacharyya')
         st.subheader('Introdução')
