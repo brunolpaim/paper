@@ -1,5 +1,5 @@
 import streamlit as st
-import opencv-python-headless
+import opencv-contrib-python
 import time
 import numpy as np
 from PIL import Image
@@ -77,8 +77,8 @@ def main():
             ''')
 
         parte1 = ''' ->
-        img1_gray = opencv-python-headless.cvtColor(img_array1, opencv-python-headless.COLOR_BGR2GRAY)
-        img2_gray = opencv-python-headless.cvtColor(img_array2, opencv-python-headless.COLOR_BGR2GRAY)
+        img1_gray = opencv-contrib-python.cvtColor(img_array1, opencv-contrib-python.COLOR_BGR2GRAY)
+        img2_gray = opencv-contrib-python.cvtColor(img_array2, opencv-contrib-python.COLOR_BGR2GRAY)
 
         '''
         st.code(parte1, language='python')
@@ -124,10 +124,10 @@ def main():
         ''')
 
         parte2 = '''->
-    hist_img1 = opencv-python-headless.calcHist([img1_gray], [0], None, [256], [0,256])
-    opencv-python-headless.normalize(hist_img1, hist_img1, alpha=0, beta=1, norm_type=opencv-python-headless.NORM_MINMAX);
-    hist_img2 = opencv-python-headless.calcHist([img2_gray], [0], None, [256], [0,256])
-    opencv-python-headless.normalize(hist_img2, hist_img2, alpha=0, beta=1, norm_type=opencv-python-headless.NORM_MINMAX);
+    hist_img1 = opencv-contrib-python.calcHist([img1_gray], [0], None, [256], [0,256])
+    opencv-contrib-python.normalize(hist_img1, hist_img1, alpha=0, beta=1, norm_type=opencv-contrib-python.NORM_MINMAX);
+    hist_img2 = opencv-contrib-python.calcHist([img2_gray], [0], None, [256], [0,256])
+    opencv-contrib-python.normalize(hist_img2, hist_img2, alpha=0, beta=1, norm_type=opencv-contrib-python.NORM_MINMAX);
         '''
         st.code(parte2, language='python')
         #Encontra o valor pela distância de Bhattacharyya
@@ -150,7 +150,7 @@ def main():
         ''')
 
         final = '''->
-    metric_val = opencv-python-headless.compareHist(hist_img1, hist_img2, opencv-python-headless.HISTCMP_BHATTACHARYYA)
+    metric_val = opencv-contrib-python.compareHist(hist_img1, hist_img2, opencv-contrib-python.HISTCMP_BHATTACHARYYA)
         '''
         st.code(final, language='python')
 
@@ -203,19 +203,19 @@ def main():
 
 
         
-        img1_gray = opencv-python-headless.cvtColor(img_array1, opencv-python-headless.COLOR_BGR2GRAY)
-        img2_gray = opencv-python-headless.cvtColor(img_array2, opencv-python-headless.COLOR_BGR2GRAY)
+        img1_gray = opencv-contrib-python.cvtColor(img_array1, opencv-contrib-python.COLOR_BGR2GRAY)
+        img2_gray = opencv-contrib-python.cvtColor(img_array2, opencv-contrib-python.COLOR_BGR2GRAY)
 
         # Calcula o histograma e faz a normalização
 
         
-        hist_img1 = opencv-python-headless.calcHist([img1_gray], [0], None, [256], [0,256])
-        opencv-python-headless.normalize(hist_img1, hist_img1, alpha=0, beta=1, norm_type=opencv-python-headless.NORM_MINMAX);
-        hist_img2 = opencv-python-headless.calcHist([img2_gray], [0], None, [256], [0,256])
-        opencv-python-headless.normalize(hist_img2, hist_img2, alpha=0, beta=1, norm_type=opencv-python-headless.NORM_MINMAX);
+        hist_img1 = opencv-contrib-python.calcHist([img1_gray], [0], None, [256], [0,256])
+        opencv-contrib-python.normalize(hist_img1, hist_img1, alpha=0, beta=1, norm_type=opencv-contrib-python.NORM_MINMAX);
+        hist_img2 = opencv-contrib-python.calcHist([img2_gray], [0], None, [256], [0,256])
+        opencv-contrib-python.normalize(hist_img2, hist_img2, alpha=0, beta=1, norm_type=opencv-contrib-python.NORM_MINMAX);
 
 
-        metric_val = opencv-python-headless.compareHist(hist_img1, hist_img2, opencv-python-headless.HISTCMP_BHATTACHARYYA)
+        metric_val = opencv-contrib-python.compareHist(hist_img1, hist_img2, opencv-contrib-python.HISTCMP_BHATTACHARYYA)
         st.write("Caso o valor seja próximo a 0.0 pode-se considerar as imagens iguais!\nQuanto mais próximo de 1, menor a relação.\n\n Resultado: {0:.2f}\n".format(metric_val))
 
     elif escolha == "Modelo de predição":
