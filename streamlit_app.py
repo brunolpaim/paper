@@ -18,7 +18,7 @@ def load_image2(up_streamlit_img2):
 def main():
     st.title("PROJETO I – APLICAÇÃO DE MÉTODOS DE APRENDIZAGEM DE LINGUAGEM DE MÁQUINA")
 
-    menu = ["Apresentação","Comparador de Imagens", "Modelo de predição com Machine Learning I", "Modelo de predição com Machine Learning II", "Considerações"]
+    menu = ["Apresentação","Comparador de Imagens", "Modelo I - Machine Learning", "Modelo II - Machine Learning", "Considerações"]
     escolha = st.sidebar.selectbox("Menu", menu)
 
     if escolha == "Apresentação":
@@ -219,7 +219,7 @@ def main():
         metric_val = cv2.compareHist(hist_img1, hist_img2, cv2.HISTCMP_BHATTACHARYYA)
         st.write("Caso o valor seja próximo a 0.0 pode-se considerar as imagens iguais!\nQuanto mais próximo de 1, menor a relação.\n\n Resultado: {0:.2f}\n".format(metric_val))
 
-    elif escolha == "Modelo de predição com Machine Learning I":
+    elif escolha == "Modelo I - Machine Learning":
         st.title('ENTREGAS DA ETAPA I')
         st.subheader('DEFINIÇÃO DO TEMA: Área de Medicina – Neurologia')
         st.subheader('OBJETIVO: Auxílio no Diagnóstico por Imagem de Tumores Cerebrais')
@@ -320,21 +320,21 @@ def main():
         
         st.text('Criação da estrutura dos datasets a partir da estrutura de pastas e definindo as variáveis')
         data_structures = '''->
-dataset_dir = os.path.join(os.getcwd(),'/content/drive/MyDrive/PaperUniasselvi/TumoresCerebrais')
+            dataset_dir = os.path.join(os.getcwd(),'/content/drive/MyDrive/PaperUniasselvi/TumoresCerebrais')
 
-dataset_train_dir = os.path.join(dataset_dir, 'treinamento')
-dataset_train_saudavel_len = len(os.listdir(os.path.join(dataset_train_dir,'saudavel')))
-dataset_train_tumor_len = len(os.listdir(os.path.join(dataset_train_dir,'tumor')))
+            dataset_train_dir = os.path.join(dataset_dir, 'treinamento')
+            dataset_train_saudavel_len = len(os.listdir(os.path.join(dataset_train_dir,'saudavel')))
+            dataset_train_tumor_len = len(os.listdir(os.path.join(dataset_train_dir,'tumor')))
 
-dataset_validation_dir = os.path.join(dataset_dir, 'validacao')
-dataset_validation_saudavel_len = len(os.listdir(os.path.join(dataset_validation_dir,'saudavel')))
-dataset_validation_tumor_len = len(os.listdir(os.path.join(dataset_validation_dir,'tumor')))
+            dataset_validation_dir = os.path.join(dataset_dir, 'validacao')
+            dataset_validation_saudavel_len = len(os.listdir(os.path.join(dataset_validation_dir,'saudavel')))
+            dataset_validation_tumor_len = len(os.listdir(os.path.join(dataset_validation_dir,'tumor')))
 
-print('Treinando para identificar cérebros saudáveis: %s' % dataset_train_saudavel_len)
-print('Treinando para identificar cérebros com tumor: %s' % dataset_train_tumor_len)
+            print('Treinando para identificar cérebros saudáveis: %s' % dataset_train_saudavel_len)
+            print('Treinando para identificar cérebros com tumor: %s' % dataset_train_tumor_len)
 
-print('Validando identificação de cérebros saudáveis: %s' % dataset_validation_saudavel_len)
-print('Validando identificação de cérebros com tumor: %s' % dataset_validation_tumor_len)
+            print('Validando identificação de cérebros saudáveis: %s' % dataset_validation_saudavel_len)
+            print('Validando identificação de cérebros com tumor: %s' % dataset_validation_tumor_len)
         '''
         
         st.code(data_structures, language='python')
@@ -342,18 +342,18 @@ print('Validando identificação de cérebros com tumor: %s' % dataset_validatio
         st.text('Abaixo estão sendo definidas os valores padrões para as imagens, o tamanho de amostragem, o número de epochs, ...')
         
         define_img_size = '''->
-image_width = 160
-image_height = 160
-image_color_channel = 3
-image_color_channel_size = 255
-image_size = (image_width, image_height)
-image_shape = image_size + (image_color_channel,)
+            image_width = 160
+            image_height = 160
+            image_color_channel = 3
+            image_color_channel_size = 255
+            image_size = (image_width, image_height)
+            image_shape = image_size + (image_color_channel,)
 
-batch_size = 32
-epochs = 20 
-learning_rate = 0.0001
+            batch_size = 32
+            epochs = 20 
+            learning_rate = 0.0001
 
-class_names = ['saudavel','tumor']
+            class_names = ['saudavel','tumor']
         '''
         
         st.code(define_img_size, language='python')
@@ -369,120 +369,119 @@ class_names = ['saudavel','tumor']
         ''')
         
         defined_datasets_variables = '''->
-dataset_train = tf.keras.preprocessing.image_dataset_from_directory(
-    dataset_train_dir,
-    image_size = image_size,
-    batch_size = batch_size,
-    shuffle = True
-)
-dataset_validation = tf.keras.preprocessing.image_dataset_from_directory(
-    dataset_validation_dir,
-    image_size = image_size,
-    batch_size = batch_size,
-    shuffle = True
-)
+            dataset_train = tf.keras.preprocessing.image_dataset_from_directory(
+                dataset_train_dir,
+                image_size = image_size,
+                batch_size = batch_size,
+                shuffle = True
+            )
+            dataset_validation = tf.keras.preprocessing.image_dataset_from_directory(
+                dataset_validation_dir,
+                image_size = image_size,
+                batch_size = batch_size,
+                shuffle = True
+            )
         '''
         st.code(defined_datasets_variables, language='python')
         
         st.text('Adicionando o método de cardinalidade por amostragem')
         
         cardinality = '''->
-        dataset_validation_cardinality = tf.data.experimental.cardinality(dataset_validation)
-dataset_validation_batches = dataset_validation_cardinality // 5
+            dataset_validation_cardinality = tf.data.experimental.cardinality(dataset_validation)
+            dataset_validation_batches = dataset_validation_cardinality // 5
 
-dataset_test = dataset_validation.take(dataset_validation_batches)
-dataset_validation = dataset_validation.skip(dataset_validation_batches)
+            dataset_test = dataset_validation.take(dataset_validation_batches)
+            dataset_validation = dataset_validation.skip(dataset_validation_batches)
 
-print('Validação do dataset por cardinalidade:  %s' % tf.data.experimental.cardinality(dataset_validation))
-print('Teste do dataset por cardinalidade:  %s' % tf.data.experimental.cardinality(dataset_test))
+            print('Validação do dataset por cardinalidade:  %s' % tf.data.experimental.cardinality(dataset_validation))
+            print('Teste do dataset por cardinalidade:  %s' % tf.data.experimental.cardinality(dataset_test))
         '''
         
         st.code(cardinality, language='python')
         
         st.text('''
-        Amostragem: Esse código serve para definirmos o gráfico de imagens que queremos
-        exibir de amostra, no caso uma grade 3x3.''')
+            Amostragem: Esse código serve para definirmos o gráfico de imagens que queremos
+            exibir de amostra, no caso uma grade 3x3.''')
         
         sampling = '''->
-def plot_dataset(dataset):
-  plt.gcf().clear()
-  plt.figure(figsize = (15,15))
+            def plot_dataset(dataset):
+              plt.gcf().clear()
+              plt.figure(figsize = (15,15))
 
-  for features, labels in dataset.take(1):
-    for i in range(9):
-      plt.subplot(3,3,i+1)
-      plt.axis('off')
+              for features, labels in dataset.take(1):
+                for i in range(9):
+                  plt.subplot(3,3,i+1)
+                  plt.axis('off')
 
-      plt.imshow(features[i].numpy().astype('uint8'))
-      plt.title(class_names[labels[i]])
+                  plt.imshow(features[i].numpy().astype('uint8'))
+                  plt.title(class_names[labels[i]])
         '''
         st.code(sampling, language='python')
         
         st.text('Amostragem de treinamento')
         
         sampling_training = '''->
-        plot_dataset(dataset_train)
+            plot_dataset(dataset_train)
         '''
         st.code(sampling_training, language='python')
         
         st.text('Amostragem de validaçao')
         
         sampling_validation = '''->
-        plot_dataset(dataset_validation)
+            plot_dataset(dataset_validation)
         '''
         st.code(sampling_validation, language='python')
         
         st.text('Amostragem de teste')
                 
         sampling_test = '''->
-        plot_dataset(dataset_test)
+            plot_dataset(dataset_test)
         '''
         st.code(sampling_test, language='python')
         
         st.text('Criação do modelo e compilação do mesmo.')
         
         compilation_code = '''->
-model = tf.keras.models.Sequential([
-tf.keras.layers.experimental.preprocessing.Rescaling(
-        1. / image_color_channel_size,
-        input_shape = image_shape
-    ),
-    tf.keras.layers.Conv2D(16, 3, padding = 'same', activation = 'relu'),
-    tf.keras.layers.MaxPooling2D(),
-    tf.keras.layers.Conv2D(32, 3, padding = 'same', activation = 'relu'),
-    tf.keras.layers.MaxPooling2D(),
-    tf.keras.layers.Conv2D(64, 3, padding = 'same', activation = 'relu'),
-    tf.keras.layers.MaxPooling2D(),
-    tf.keras.layers.Flatten(),
-    tf.keras.layers.Dense(128, activation = 'relu'),
-    tf.keras.layers.Dense(1, activation='sigmoid')
-])
+            model = tf.keras.models.Sequential([
+            tf.keras.layers.experimental.preprocessing.Rescaling(
+                    1. / image_color_channel_size,
+                    input_shape = image_shape
+                ),
+                tf.keras.layers.Conv2D(16, 3, padding = 'same', activation = 'relu'),
+                tf.keras.layers.MaxPooling2D(),
+                tf.keras.layers.Conv2D(32, 3, padding = 'same', activation = 'relu'),
+                tf.keras.layers.MaxPooling2D(),
+                tf.keras.layers.Conv2D(64, 3, padding = 'same', activation = 'relu'),
+                tf.keras.layers.MaxPooling2D(),
+                tf.keras.layers.Flatten(),
+                tf.keras.layers.Dense(128, activation = 'relu'),
+                tf.keras.layers.Dense(1, activation='sigmoid')
+            ])
 
-model.compile(
-    optimizer = tf.keras.optimizers.Adam(learning_rate = learning_rate),
-    loss = tf.keras.losses.BinaryCrossentropy(),
-    metrics = ['accuracy']
-)
+            model.compile(
+                optimizer = tf.keras.optimizers.Adam(learning_rate = learning_rate),
+                loss = tf.keras.losses.BinaryCrossentropy(),
+                metrics = ['accuracy']
+            )
 
-model.summary()
+            model.summary()
         '''
         
         st.code(compilation_code, language='python')
         
         st.text('''
-        Amostra visual de como funcionam os "Epochs" dentro do modelo
-        em função do tempo (histrograma dos epochs).
+            Amostra visual de como funcionam os "Epochs" dentro do modelo
+            em função do tempo (histrograma dos epochs).
         ''')
         
         epochs_hist = '''->
-history = model.fit(
-    dataset_train,
-    validation_data = dataset_validation,
-    epochs = epochs
-)
+            history = model.fit(
+                dataset_train,
+                validation_data = dataset_validation,
+                epochs = epochs
+            )
         '''
         st.code(epochs_hist, language='python')
-        
         
         st.subheader('Como funciona um modelo de predição?')
         st.text('''
@@ -504,22 +503,22 @@ history = model.fit(
         st.text('Plotagem de modelos de predições')
         
         plot_predictions = '''->
-def plot_dataset_predictions(dataset):
-  features, labels = dataset.as_numpy_iterator().next()
-  predictions = model.predict_on_batch(features).flatten()
-  predictions = tf.where(predictions < 0.5, 0, 1)
+            def plot_dataset_predictions(dataset):
+              features, labels = dataset.as_numpy_iterator().next()
+              predictions = model.predict_on_batch(features).flatten()
+              predictions = tf.where(predictions < 0.5, 0, 1)
 
-  print('Etiquetas: %s' % labels)
-  print('Predições: %s' % predictions.numpy())
+              print('Etiquetas: %s' % labels)
+              print('Predições: %s' % predictions.numpy())
 
-  plt.gcf().clear()
-  plt.figure(figsize = (15,15))
+              plt.gcf().clear()
+              plt.figure(figsize = (15,15))
 
-  for i in range (9):
-    plt.subplot(3,3,i+1)
-    plt.axis('off')
-    plt.imshow(features[i].astype('uint8'))
-    plt.title(class_names[predictions[i]])
+              for i in range (9):
+                plt.subplot(3,3,i+1)
+                plt.axis('off')
+                plt.imshow(features[i].astype('uint8'))
+                plt.title(class_names[predictions[i]])
         '''
         
         st.code(plot_predictions, language='python')
@@ -527,11 +526,11 @@ def plot_dataset_predictions(dataset):
         st.text('Salvando o modelo em uma pasta na raiz do projeto, onde fica disponivel para download.')
         
         saving_root = '''->
-        model.save('modelo_tumor_cerebral')
+            model.save('modelo_tumor_cerebral')
         '''
         st.code(saving_root, language='python')
         
-    elif escolha == "Modelo de predição com Machine Learning II":
+    elif escolha == "Modelo II - Machine Learning":
         st.write("Algoritmo de predição com 16 camadas de aprendizagem")
     elif escolha == "Considerações":
         st.write("Considerações")
