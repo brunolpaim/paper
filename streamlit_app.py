@@ -17,7 +17,7 @@ def load_image2(up_streamlit_img2):
 def main():
     st.title("PROJETO I – APLICAÇÃO DE MÉTODOS DE APRENDIZAGEM DE LINGUAGEM DE MÁQUINA")
 
-    menu = ["Apresentação","Modelo 0 - Comparador de Imagens", "Modelo I - Machine Learning", "Modelo II - Machine Learning", "Considerações"]
+    menu = ["Apresentação","Modelo 0 - Comparador de Imagens", "Modelo I - Machine Learning", "Modelo II - Machine Learning", "FAQ", "Considerações"]
     escolha = st.sidebar.selectbox("Menu", menu)
 
     if escolha == "Apresentação":
@@ -531,10 +531,15 @@ def main():
         
     elif escolha == "Modelo II - Machine Learning":
         st.write("Algoritmo de predição com 16 camadas de aprendizagem")
+    elif escolha == "FAQ":
+        st.subheader('Perguntas e respostas frequentes')
+        st.write("")
     elif escolha == "Considerações":
-        st.write("Considerações")
+        st.subheader('Considerações')
+        st.write("A equipe espera que este projeto possa ser usado em casos reais, auxiliando médicos, enfermeiros e pacientes em sua jornada.")
     else:
         st.subheader('About')
+        st.write("Este projeto não foi carregado corretamente, tente recarregar a página ou esvazie seu cache do navegador.")
 
 if __name__ == '__main__':
     main()
