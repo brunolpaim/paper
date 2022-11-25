@@ -239,6 +239,7 @@ def main():
 
     elif escolha == "Modelo I - Machine Learning":
         st.title('Modelo I - Machine Learning')
+        st.write("Algoritmo de predição com 9 camadas de aprendizagem")
         st.subheader('DEFINIÇÃO DO TEMA: Área de Medicina – Neurologia')
         st.subheader('OBJETIVO: Auxílio no Diagnóstico por Imagem de Tumores Cerebrais')
         st.subheader('ESPECIFICAÇÃO:')
@@ -549,10 +550,341 @@ def main():
         st.code(saving_root, language='python')
         
     elif escolha == "Modelo II - Machine Learning":
-        st.write("Algoritmo de predição com 16 camadas de aprendizagem")
+        st.write("Algoritmo de predição com 12 camadas de aprendizagem")
+        st.subheader('DEFINIÇÃO DO TEMA: Área de Medicina – Neurologia')
+        st.subheader('OBJETIVO: Auxílio no Diagnóstico por Imagem de Tumores Cerebrais')
+        st.subheader('ESPECIFICAÇÃO:')
+        st.text('''
+            Reconhecimento de tumores cerebrais através da análise de imagens.
+            Este projeto busca automatizar o reconhecimento de padrões através
+            de machine learning, fazendo com que a rede neural convolucional consiga
+            compreender as características de um cérebro com tumor,e futuramente 
+            classificar o tipo de tumor e estágio.
+            
+            Para o momento, o desenvolvimento focará apenas na classificação de cérebros
+            com tumores identificáveis e cérebros saudáveis.
+
+            Uma ressonância magnética do cérebro pode ajudar os médicos a procurar condições
+            como sangramento, inchaço, problemas com a forma como o cérebro se desenvolveu,
+            tumores, infecções, inflamação,
+            danos causados por uma lesão ou acidente vascular cerebral
+            ou problemas nos vasos sanguíneos.
+            A ressonância magnética também pode ajudar os médicos
+            a procurar causas de dores de cabeça ou convulsões.
+        ''')
+        st.subheader('ESPECIFICAÇÃO TÉCNICA:')
+        st.text('''
+            Utilização do Algorítimo de “Bhattacharyya distance”
+            (Codificado na linguagem de programação Python, com método supervisionado),
+            com classificação e regressão, 7 camadas de aprendizagem para reconhecimento
+            de imagens e seus padrões (por % de aproximação equidade) de cérebros com
+            tumores cerebrais em banco de dados, para auxilio ao médico no diagnóstico
+            do exame do paciente via APP.
+
+            Os arquivos serão baixados de uma pasta compactada, descompactados e
+            então a pasta zipada será removida, deixando apenas o
+            conteúdo descompactado disponível na pasta TumoresCerebrais
+            e suas subpastas.
+        ''')
+        
+        st.title('O que é um modelo de predição?')
+        st.text('''
+            O modelo de predição é uma função matemática que pode prever o futuro com eficiência
+            usando dados matemáticos, estatísticos e técnicas do Machine Learning.
+
+            Ele busca padrões através de uma grande quantidade de dados soltos para identificar
+            possíveis tendências, calculando resultados e soluções que reforcem
+            a segurança e otimizem o sistema de dados.
+
+            A partir dos resultados obtidos por essas análises,
+            o utilizador consegue tomar decisões baseadas nessas futuras probabilidades.
+            
+            Lembrando que com esse modelo, há uma maior certeza de que essas probabilidades 
+            estão corretas, diferentemente da intuição.
+
+            Pode-se dizer também que o modelo de predição usa dados do passado e
+            do presente para conseguir descobrir dados do futuro.
+        ''')
+        
+        st.title('Início da execução do projeto')
+        st.text('''
+            Essas linhas de código abaixo montam virtualmente o Google Drive como pasta
+            internamente e evita de ter de fazer o upload toda vez que o código rodar.
+        ''')
+        
+        explicacao_colab = '''
+        from google.colab import drive
+        drive.mount('/content/drive/')
+        '''
+        st.code(explicacao_colab, language='python')
+        
+        st.text('''
+            Instalando a biblioteca tensorflow.
+
+            A lib python TensorFlow é também um Framework, ou seja, uma união de
+            códigos que visa servir a uma aplicação.
+
+            Depois que o TensorFlow está instalado, você pode utilizar
+            qualquer editor de código para rodar seus códigos TensorFlow.
+            Muito parecido com Numpy, Scikit-learn, Pandas, etc.
+
+            Mas, ao contrário das bibliotecas Python tradicionais,
+            para executar um código TensorFlow existem alguns detalhes específicos,
+            como a abertura de uma sessão, mas atualemte é feita de forma automática a 
+            partir po Python 3.6.
+        ''')
+        
+        tensorflowcode = '''
+        !pip install tensorflow
+        '''
+        st.code(tensorflowcode, language='python')
+        
+        st.text('Abaixo serão importadas as bibliotecas necessárias para o projeto')
+        importsprjt = '''
+            import os
+            import matplotlib.pyplot as plt 
+            import tensorflow as tf
+        '''
+        
+        st.code(importsprjt, language='python')
+        
+        st.text('Criação da estrutura dos datasets a partir da estrutura de pastas e definindo as variáveis')
+        data_structures = '''
+            dataset_dir = os.path.join(os.getcwd(),'/content/drive/MyDrive/PaperUniasselvi/TumoresCerebrais')
+
+            dataset_train_dir = os.path.join(dataset_dir, 'treinamento')
+            dataset_train_saudavel_len = len(os.listdir(os.path.join(dataset_train_dir,'saudavel')))
+            dataset_train_tumor_len = len(os.listdir(os.path.join(dataset_train_dir,'tumor')))
+
+            dataset_validation_dir = os.path.join(dataset_dir, 'validacao')
+            dataset_validation_saudavel_len = len(os.listdir(os.path.join(dataset_validation_dir,'saudavel')))
+            dataset_validation_tumor_len = len(os.listdir(os.path.join(dataset_validation_dir,'tumor')))
+
+            print('Treinando para identificar cérebros saudáveis: %s' % dataset_train_saudavel_len)
+            print('Treinando para identificar cérebros com tumor: %s' % dataset_train_tumor_len)
+
+            print('Validando identificação de cérebros saudáveis: %s' % dataset_validation_saudavel_len)
+            print('Validando identificação de cérebros com tumor: %s' % dataset_validation_tumor_len)
+        '''
+        
+        st.code(data_structures, language='python')
+        
+        st.text('Abaixo estão sendo definidas os valores padrões para as imagens, o tamanho de amostragem, o número de epochs, ...')
+        
+        define_img_size = '''
+            image_width = 160
+            image_height = 160
+            image_color_channel = 3
+            image_color_channel_size = 255
+            image_size = (image_width, image_height)
+            image_shape = image_size + (image_color_channel,)
+
+            batch_size = 32
+            epochs = 20 
+            learning_rate = 0.0001
+
+            class_names = ['saudavel','tumor']
+        '''
+        
+        st.code(define_img_size, language='python')
+        
+        st.text('''
+            Abaixo estão sendo definidos os datasets e suas respectivas variáveis,
+            bem como habilitando o método aleatório (shuffle)
+
+            O método shuffle é usado para ordenar pseudo-aleatóriamente as imagens
+            presentes no dataset, fazendo assim que o treinamento seja
+            baseado em amostras. Isso é importante para determinar
+            se o método é válido com diferentes amostras.
+        ''')
+        
+        defined_datasets_variables = '''
+            dataset_train = tf.keras.preprocessing.image_dataset_from_directory(
+                dataset_train_dir,
+                image_size = image_size,
+                batch_size = batch_size,
+                shuffle = True
+            )
+            dataset_validation = tf.keras.preprocessing.image_dataset_from_directory(
+                dataset_validation_dir,
+                image_size = image_size,
+                batch_size = batch_size,
+                shuffle = True
+            )
+        '''
+        st.code(defined_datasets_variables, language='python')
+        
+        st.text('Adicionando o método de cardinalidade por amostragem')
+        
+        cardinality = '''
+            dataset_validation_cardinality = tf.data.experimental.cardinality(dataset_validation)
+            dataset_validation_batches = dataset_validation_cardinality // 5
+
+            dataset_test = dataset_validation.take(dataset_validation_batches)
+            dataset_validation = dataset_validation.skip(dataset_validation_batches)
+
+            print('Validação do dataset por cardinalidade:  %s' % tf.data.experimental.cardinality(dataset_validation))
+            print('Teste do dataset por cardinalidade:  %s' % tf.data.experimental.cardinality(dataset_test))
+        '''
+        
+        st.code(cardinality, language='python')
+        
+        st.text('''
+            Amostragem: Esse código serve para definirmos o gráfico de imagens que queremos
+            exibir de amostra, neste caso, uma grade 3x3.''')
+        
+        sampling = '''
+            def plot_dataset(dataset):
+              plt.gcf().clear()
+              plt.figure(figsize = (15,15))
+
+              for features, labels in dataset.take(1):
+                for i in range(9):
+                  plt.subplot(3,3,i+1)
+                  plt.axis('off')
+
+                  plt.imshow(features[i].numpy().astype('uint8'))
+                  plt.title(class_names[labels[i]])
+        '''
+        st.code(sampling, language='python')
+        
+        st.text('Amostragem de treinamento')
+        
+        sampling_training = '''
+            plot_dataset(dataset_train)
+        '''
+        st.code(sampling_training, language='python')
+        
+        st.text('Amostragem de validaçao')
+        
+        sampling_validation = '''
+            plot_dataset(dataset_validation)
+        '''
+        st.code(sampling_validation, language='python')
+        
+        st.text('Amostragem de teste')
+                
+        sampling_test = '''
+            plot_dataset(dataset_test)
+        '''
+        st.code(sampling_test, language='python')
+        
+        st.text('Criação do modelo e compilação do mesmo.')
+        
+        compilation_code = '''
+            model = tf.keras.models.Sequential([
+            tf.keras.layers.experimental.preprocessing.Rescaling(
+                    1. / image_color_channel_size,
+                    input_shape = image_shape
+                ),
+
+                tf.keras.layers.Conv2D(32, (3, 3), padding='same', input_shape=x_train.shape[1:],activation('relu')))
+                tf.keras.layers.Conv2D(32,(3, 3),activation('relu'))
+                tf.keras.layers.MaxPooling2D(pool_size=(2, 2))
+                tf.keras.layers.Dropout(0.25)
+                tf.keras.layers.Conv2D(64, (3, 3), padding='same',activation('relu'))
+                tf.keras.layers.Conv2D(64, (3,3),activation('relu'))
+                tf.keras.layers.MaxPooling2D(pool_size=(2, 2))
+                tf.keras.layers.Dropout(0.25)
+                tf.keras.layers.Flatten()
+                tf.keras.layers.Dense(32,activation('relu'))
+                tf.keras.layers.Dropout(0.5)
+                tf.keras.layers.Dense(density,activation('softmax'))
+            ])
+
+            model.compile(
+                optimizer = tf.keras.optimizers.Adam(learning_rate = learning_rate),
+                loss = tf.keras.losses.BinaryCrossentropy(),
+                metrics = ['accuracy']
+            )
+
+            model.summary()
+        '''
+        
+        st.code(compilation_code, language='python')
+        
+        st.text('''
+            Amostra visual de como funcionam os "Epochs" dentro do modelo
+            em função do tempo (histrograma dos epochs).
+        ''')
+        
+        epochs_hist = '''
+            history = model.fit(
+                dataset_train,
+                validation_data = dataset_validation,
+                epochs = epochs
+            )
+        '''
+        st.code(epochs_hist, language='python')
+        
+        st.subheader('Como funciona um modelo de predição?')
+        st.text('''
+            Coleta de dados: momento de obter a base de dados de modo fácil
+            e organizado. É fundamental não ocorrer erros, pois isso compromete
+            todo o resto do processo. Essa etapa serve para facilitar
+            a compreensão de dados pelo algoritmo.
+
+            Processamento de dados: etapa para processar os dados obtidos e identificar lacunas,
+            produzindo resultados.
+            Podem ser usadas diversas ferramentas técnicas
+            como Inteligência Artificial e Machine Learning.
+
+            Validação de dados:
+            depois de ter os dados processados, eles são monitorados e calibrados;
+            são avaliados a qualidade, precisão e suficiência para ser adotado como modelo.
+        ''')
+        
+        st.text('Plotagem de modelos de predições')
+        
+        plot_predictions = '''
+            def plot_dataset_predictions(dataset):
+              features, labels = dataset.as_numpy_iterator().next()
+              predictions = model.predict_on_batch(features).flatten()
+              predictions = tf.where(predictions < 0.5, 0, 1)
+
+              print('Etiquetas: %s' % labels)
+              print('Predições: %s' % predictions.numpy())
+
+              plt.gcf().clear()
+              plt.figure(figsize = (15,15))
+
+              for i in range (9):
+                plt.subplot(3,3,i+1)
+                plt.axis('off')
+                plt.imshow(features[i].astype('uint8'))
+                plt.title(class_names[predictions[i]])
+        '''
+        
+        st.code(plot_predictions, language='python')
+        
+        st.text('Salvando o modelo em uma pasta na raiz do projeto, onde fica disponivel para download.')
+        
+        saving_root = '''
+            model.save('modelo_tumor_cerebral')
+        '''
+        st.code(saving_root, language='python')
+        
     elif escolha == "FAQ":
         st.subheader('Perguntas e respostas frequentes')
         st.write("")
+        st.text('''
+            Qual a aplicação dessa ferramenta?
+                Esta ferramenta possibilita que o médico, enfermeiro ou residente possua um auxílio na identificação de tumores cerebrais.
+                
+            Como saber se o algoritmo realmente é inteligente?
+                Sim! Utilizamos métodos matemáticos baseados em análises de imagem!
+                
+            O algoritmo está preparado para quais tipos e formatos de imagens?
+                Atualmente 
+            O projeto está preparado para verificar tumores de qualquer imagem de cérebros?
+                a
+            Qualquer etnia, sexo, idade e características são atendidas para este projeto?
+                a
+            Esse algoritmo atende imagens de outras partes do corpo?
+                a
+            O projeto será expandido para outras área da medicina ou na área veterinária?
+                a
+        ''')
     elif escolha == "Considerações":
         st.subheader('Considerações')
         st.write("A equipe espera que este projeto possa ser usado em casos reais, auxiliando médicos, enfermeiros e pacientes em sua jornada.")
