@@ -238,7 +238,7 @@ def main():
         st.write("Caso o valor seja próximo a 0.0 pode-se considerar as imagens iguais!\nQuanto mais próximo de 1, menor a relação.\n\n Resultado: {0:.2f}\n".format(metric_val))
 
     elif escolha == "Modelo I - Machine Learning":
-        st.title('Modelo I - Machine Learning')
+        st.header('Modelo I - Machine Learning')
         st.write("Algoritmo de predição com 9 camadas de aprendizagem")
         st.subheader('DEFINIÇÃO DO TEMA: Área de Medicina – Neurologia')
         st.subheader('OBJETIVO: Auxílio no Diagnóstico por Imagem de Tumores Cerebrais')
@@ -550,6 +550,7 @@ def main():
         st.code(saving_root, language='python')
         
     elif escolha == "Modelo II - Machine Learning":
+        st.header('Modelo II - Machine Learning')
         st.write("Algoritmo de predição com 12 camadas de aprendizagem")
         st.subheader('DEFINIÇÃO DO TEMA: Área de Medicina – Neurologia')
         st.subheader('OBJETIVO: Auxílio no Diagnóstico por Imagem de Tumores Cerebrais')
