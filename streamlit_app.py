@@ -68,32 +68,32 @@ def main():
         st.header('Comparador de imagens por histogramas e distância de Bhattacharyya')
         st.subheader('Introdução')
         st.text('''
-          Esta aplicação analisa e compara imagens para auxiliar nas comparações de exames 
-          médicos e é baseada no mecanismo semelhante ao do olho humano, com identificação 
-          por cores, iluminação e saturação.
+            Esta aplicação analisa e compara imagens para auxiliar nas comparações de exames 
+            médicos e é baseada no mecanismo semelhante ao do olho humano, com identificação 
+            por cores, iluminação e saturação.
 
-          Esse método específico foi pensado para que seja possível simular o mesmo que 
-          um humano normal pode identificar, além de auxiliar médicos que tenham deficiências visuais.
+            Esse método específico foi pensado para que seja possível simular o mesmo que 
+            um humano normal pode identificar, além de auxiliar médicos que tenham deficiências visuais.
 
-          O método utilizado consiste em transformar os dados de imagens em cores para imagens
-          em escala de preto e branco, dessa forma a máquina aumenta o grau de precisão para 
-          análise de tumores identificáveis.
+            O método utilizado consiste em transformar os dados de imagens em cores para imagens
+            em escala de preto e branco, dessa forma a máquina aumenta o grau de precisão para 
+            análise de tumores identificáveis.
 
-          Isto simplifica a comparação pois trabalha apenas com variações de tons de cinza e então 
-          as imagens são então comparadas usando o método "distância de Bhattacharyya".              
+            Isto simplifica a comparação pois trabalha apenas com variações de tons de cinza e então 
+            as imagens são então comparadas usando o método "distância de Bhattacharyya".              
             ''')
 
         st.subheader('Uso da aplicação')
         st.text('''
             A aplicação aguarda até 5 minutos para que sejam preenchidas as imagens 1 e 2 a serem comparadas.
             Há botões de inserção de imagens abaixo na página.
-            
+
             Internamente, estas imagens são armazenadas em variáveis do tipo array.
-            
+
             Em seguida, como a aplicação não é capaz de garantir que a entrada das imagens
             seja em preto-e-branco, é feita a conversão através da função cv::cvtColor(),
             da biblioteca OpenCV (opencv-python-headless==4.6.0.66).
-            
+
             É usado o argumento COLOR_BGR2GRAY para especificar que a queremos em P&B.
             ''')
 
@@ -153,19 +153,19 @@ def main():
         #Encontra o valor pela distância de Bhattacharyya
         st.subheader('A distância de Bhattacharyya:')
         st.text('''
-        O OpenCV tem um método nativo para comparação de histogramas, o cv::compareHist().
-        Este possui três argumentos:
-        1 -> Primeiro Histograma,
-        2 -> Segundo histograma,
-        3 -> uma flag que indica o método de comparação a ser
-            executado (no caso, o de Battacharyya).
-        
-        Em estatística, a distância de Bhattacharyya mede a similaridade de duas
-        distribuições de probabilidade discretas ou contínuas.
-        Está intimamente relacionado ao coeficiente de Bhattacharyya,
-        que mede a quantidade de sobreposição entre duas amostras estatísticas
-        ou populações. O resultado do cálculo da distância Bhattacharyya é
-        1 para uma correspondência completa e 0 para uma incompatibilidade completa.
+            O OpenCV tem um método nativo para comparação de histogramas, o cv::compareHist().
+            Este possui três argumentos:
+            1 -> Primeiro Histograma,
+            2 -> Segundo histograma,
+            3 -> uma flag que indica o método de comparação a ser
+                executado (no caso, o de Battacharyya).
+
+            Em estatística, a distância de Bhattacharyya mede a similaridade de duas
+            distribuições de probabilidade discretas ou contínuas.
+            Está intimamente relacionado ao coeficiente de Bhattacharyya,
+            que mede a quantidade de sobreposição entre duas amostras estatísticas
+            ou populações. O resultado do cálculo da distância Bhattacharyya é
+            1 para uma correspondência completa e 0 para uma incompatibilidade completa.
         ''')
 
         final = '''
