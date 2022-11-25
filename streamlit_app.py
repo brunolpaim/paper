@@ -24,37 +24,44 @@ def main():
         
         st.header('EQUIPE 10')
         st.subheader('''
-            Bruno Lopes Paim (3140116) (brunolpaim@gmail.com):
+            Bruno Lopes Paim:
         ''')
         st.text('''
-                Programação Fullstack (backend colab, backend github + frontend website + P&D)
+            (3140116) (brunolpaim@gmail.com)
+            Programação Fullstack (backend colab, backend github + frontend website + P&D)
         ''')
         st.subheader('''
-            John Erick Bento de Godoi dos Santos (3121508) (jhonerick111@gmail.com):
+            John Erick Bento de Godoi dos Santos:
         ''')
         st.text('''
+            (3121508) (jhonerick111@gmail.com)
             Programação Fullstack (frontend webframework + P&D)
         ''') 
         st.subheader('''
-            Joaby Rodrigues da Silva (3093586) (joabyanalistadedados3@gmail.com):
+            Joaby Rodrigues da Silva:
         ''')
         st.text('''
-                Análise de dados, busca de datasets, conversão de imagens
+            (3093586) (joabyanalistadedados3@gmail.com)
+            Análise de dados, busca de datasets, conversão de imagens
         ''')
         st.subheader('''
-            João Ricardo Castro Melo (3127198) (joaorcm@gmail.com):
+            João Ricardo Castro Melo:
         ''')
         st.text('''
-                Documentação, classificação de imagens, historytellig
+            (3127198) (joaorcm@gmail.com)
+            Documentação, classificação de imagens, historytellig
         ''')
         st.subheader('''
-            Marcus Vinicius Começanha Silva (3613343) (mavincom@gmail.com):
+            Marcus Vinicius Começanha Silva:
         ''')
         st.text('''
-                Documentação, Gerenciamento de tempo e tarefas, historytelling
+            (3613343) (mavincom@gmail.com)
+            Documentação, Gerenciamento de tempo e tarefas, historytelling
         ''')
-        
-        st.image('meme.png', caption='Legenda: "Meme de como o cerebro de um dev funciona."(risos) ')
+        st.subheader('''
+            Exemplo de caso real:
+        ''')
+        st.image('meme.png', caption='Legenda: "Meme de como o cerebro de um dev funciona."(contém sarcasmo, risos) ')
            
     elif escolha == "Modelo 0 - Comparador de Imagens":
 
@@ -68,7 +75,7 @@ def main():
           Esse método específico foi pensado para que seja possível simular o mesmo que 
           um humano normal pode identificar, além de auxiliar médicos que tenham deficiências visuais.
 
-          O método utlizado consiste em transformar os dados de imagens em cores para imagens
+          O método utilizado consiste em transformar os dados de imagens em cores para imagens
           em escala de preto e branco, dessa forma a máquina aumenta o grau de precisão para 
           análise de tumores identificáveis.
 
@@ -90,7 +97,7 @@ def main():
             É usado o argumento COLOR_BGR2GRAY para especificar que a queremos em P&B.
             ''')
 
-        parte1 = ''' ->
+        parte1 = '''
         img1_gray = cv2.cvtColor(img_array1, cv2.COLOR_BGR2GRAY)
         img2_gray = cv2.cvtColor(img_array2, cv2.COLOR_BGR2GRAY)
 
@@ -100,22 +107,21 @@ def main():
         st.subheader('O que é um Histograma?')
         st.text('''
             Um histograma de uma imagem é um vetor (ou lista) de incidência de
-            valores individuais de pixels.
-            Ou seja, para cada valor possível que um pixel pode assumir,
-            quantas vezes esse valor aparece?
-            Esta lista é feita de maneira ordenada. Numa imagem P&B,
-            como é o caso aqui, os valores mais claros estarão mais adiante no vetor,
+            valores individuais de pixels, ou seja, para cada valor possível que um pixel pode assumir,
+            quantas vezes esse valor irá coincidir?
+            Esta lista é feita de maneira ordenada. Numa imagem com variações de tons de cinza,
+            como neste caso, os valores mais claros estarão mais adiante no vetor,
             enquanto que os mais escuros estarão no início. Observe a imagem a seguir.
         ''')
         st.image('exemploHistograma.png', caption='Exemplo de histograma de imagem em P&B.')
         st.text('''
             O cálculo do histograma varre cada pixel e vê seu valor, acumulando
-            na posição correspondente do vetor quantas vezes aquela cor aparece.
+            na posição correspondente do vetor quantas vezes aquela determinada cor aparece.
             É necessário chamar a atenção para que a operação de histograma
             de uma imagem é destrutiva, ou seja, a partir de uma imgem
             se gera seu histograma, mas a partir do histograma não se gera uma imagem, 
             pois não se sabe onde cada pixel acumuluado no histograma ocorreu.
-            Não obstante, comparar histogramas de imagens é uma operação
+            Adicionalmente, comparar histogramas de imagens é uma operação
             de custo computacional muito mais baixo do que comparar imagens pixel a pixel.
             Outra vantagem de comparar histogramas é superar
             o deslocamento dentro de um fundo escuro, não sendo 
@@ -125,8 +131,8 @@ def main():
         st.subheader('Calcular histogramas dá certo?')
         st.text('''
             Apesar de ser uma operação destrutiva, a chance de duas imagens diferentes
-            gerar histogramas similares é baixíssima. 
-            Portanto, se os histogramas dessas duas imagens forem iguais,
+            gerar histogramas similares é baixíssima, o que faz a acertabilidade aumentar. 
+            Caso os histogramas dessas duas imagens forem iguais,
             ou tiverem um grau muito alto de semelhança, então, em certa medida,
             podemos pensar que as duas imagens são iguais ou muito similares.
             No caso de medidas físicas, como é o caso das tomografias computadorizadas e das
@@ -137,34 +143,33 @@ def main():
             além da função normalize() para superar diferenças de tamanho e aspecto.
         ''')
 
-        parte2 = '''->
-    hist_img1 = cv2.calcHist([img1_gray], [0], None, [256], [0,256])
-    cv2.normalize(hist_img1, hist_img1, alpha=0, beta=1, norm_type=cv2.NORM_MINMAX);
-    hist_img2 = cv2.calcHist([img2_gray], [0], None, [256], [0,256])
-    cv2.normalize(hist_img2, hist_img2, alpha=0, beta=1, norm_type=cv2.NORM_MINMAX);
+        parte2 = '''
+        hist_img1 = cv2.calcHist([img1_gray], [0], None, [256], [0,256])
+        cv2.normalize(hist_img1, hist_img1, alpha=0, beta=1, norm_type=cv2.NORM_MINMAX);
+        hist_img2 = cv2.calcHist([img2_gray], [0], None, [256], [0,256])
+        cv2.normalize(hist_img2, hist_img2, alpha=0, beta=1, norm_type=cv2.NORM_MINMAX);
         '''
         st.code(parte2, language='python')
         #Encontra o valor pela distância de Bhattacharyya
-        st.subheader('Por fim, a distância de Bhattacharyya')
+        st.subheader('A distância de Bhattacharyya:')
         st.text('''
         O OpenCV tem um método nativo para comparação de histogramas, o cv::compareHist().
         Este possui três argumentos:
-        1-> Primeiro Histograma,
-        2-> Segundo histograma,
-        3-> uma flag que indica o metododo de comparação a ser
+        1 -> Primeiro Histograma,
+        2 -> Segundo histograma,
+        3 -> uma flag que indica o método de comparação a ser
             executado (no caso, o de Battacharyya).
         
         Em estatística, a distância de Bhattacharyya mede a similaridade de duas
         distribuições de probabilidade discretas ou contínuas.
         Está intimamente relacionado ao coeficiente de Bhattacharyya,
         que mede a quantidade de sobreposição entre duas amostras estatísticas
-        ou populações. O resultado do cálculo
-        da distância Bhattacharyya é 1 para uma correspondência completa
-        e 0 para uma incompatibilidade completa.
+        ou populações. O resultado do cálculo da distância Bhattacharyya é
+        1 para uma correspondência completa e 0 para uma incompatibilidade completa.
         ''')
 
-        final = '''->
-    metric_val = cv2.compareHist(hist_img1, hist_img2, cv2.HISTCMP_BHATTACHARYYA)
+        final = '''
+        metric_val = cv2.compareHist(hist_img1, hist_img2, cv2.HISTCMP_BHATTACHARYYA)
         '''
         st.code(final, language='python')
 
@@ -295,7 +300,7 @@ def main():
             internamente e evita de ter de fazer o upload toda vez que o código rodar.
         ''')
         
-        explicacao_colab = '''->
+        explicacao_colab = '''
         from google.colab import drive
         drive.mount('/content/drive/')
         '''
@@ -317,13 +322,13 @@ def main():
             partir po Python 3.6.
         ''')
         
-        tensorflowcode = '''->
+        tensorflowcode = '''
         !pip install tensorflow
         '''
         st.code(tensorflowcode, language='python')
         
         st.text('Abaixo serão importadas as bibliotecas necessárias para o projeto')
-        importsprjt = '''->
+        importsprjt = '''
             import os
             import matplotlib.pyplot as plt 
             import tensorflow as tf
@@ -332,7 +337,7 @@ def main():
         st.code(importsprjt, language='python')
         
         st.text('Criação da estrutura dos datasets a partir da estrutura de pastas e definindo as variáveis')
-        data_structures = '''->
+        data_structures = '''
             dataset_dir = os.path.join(os.getcwd(),'/content/drive/MyDrive/PaperUniasselvi/TumoresCerebrais')
 
             dataset_train_dir = os.path.join(dataset_dir, 'treinamento')
@@ -354,7 +359,7 @@ def main():
         
         st.text('Abaixo estão sendo definidas os valores padrões para as imagens, o tamanho de amostragem, o número de epochs, ...')
         
-        define_img_size = '''->
+        define_img_size = '''
             image_width = 160
             image_height = 160
             image_color_channel = 3
@@ -381,7 +386,7 @@ def main():
             se o método é válido com diferentes amostras.
         ''')
         
-        defined_datasets_variables = '''->
+        defined_datasets_variables = '''
             dataset_train = tf.keras.preprocessing.image_dataset_from_directory(
                 dataset_train_dir,
                 image_size = image_size,
@@ -399,7 +404,7 @@ def main():
         
         st.text('Adicionando o método de cardinalidade por amostragem')
         
-        cardinality = '''->
+        cardinality = '''
             dataset_validation_cardinality = tf.data.experimental.cardinality(dataset_validation)
             dataset_validation_batches = dataset_validation_cardinality // 5
 
@@ -416,7 +421,7 @@ def main():
             Amostragem: Esse código serve para definirmos o gráfico de imagens que queremos
             exibir de amostra, neste caso, uma grade 3x3.''')
         
-        sampling = '''->
+        sampling = '''
             def plot_dataset(dataset):
               plt.gcf().clear()
               plt.figure(figsize = (15,15))
@@ -433,28 +438,28 @@ def main():
         
         st.text('Amostragem de treinamento')
         
-        sampling_training = '''->
+        sampling_training = '''
             plot_dataset(dataset_train)
         '''
         st.code(sampling_training, language='python')
         
         st.text('Amostragem de validaçao')
         
-        sampling_validation = '''->
+        sampling_validation = '''
             plot_dataset(dataset_validation)
         '''
         st.code(sampling_validation, language='python')
         
         st.text('Amostragem de teste')
                 
-        sampling_test = '''->
+        sampling_test = '''
             plot_dataset(dataset_test)
         '''
         st.code(sampling_test, language='python')
         
         st.text('Criação do modelo e compilação do mesmo.')
         
-        compilation_code = '''->
+        compilation_code = '''
             model = tf.keras.models.Sequential([
             tf.keras.layers.experimental.preprocessing.Rescaling(
                     1. / image_color_channel_size,
@@ -487,7 +492,7 @@ def main():
             em função do tempo (histrograma dos epochs).
         ''')
         
-        epochs_hist = '''->
+        epochs_hist = '''
             history = model.fit(
                 dataset_train,
                 validation_data = dataset_validation,
@@ -515,7 +520,7 @@ def main():
         
         st.text('Plotagem de modelos de predições')
         
-        plot_predictions = '''->
+        plot_predictions = '''
             def plot_dataset_predictions(dataset):
               features, labels = dataset.as_numpy_iterator().next()
               predictions = model.predict_on_batch(features).flatten()
@@ -538,7 +543,7 @@ def main():
         
         st.text('Salvando o modelo em uma pasta na raiz do projeto, onde fica disponivel para download.')
         
-        saving_root = '''->
+        saving_root = '''
             model.save('modelo_tumor_cerebral')
         '''
         st.code(saving_root, language='python')
