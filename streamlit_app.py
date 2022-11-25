@@ -866,29 +866,59 @@ def main():
         st.code(saving_root, language='python')
         
     elif escolha == "FAQ":
-        st.subheader('Perguntas e respostas frequentes')
-        st.write("")
+        st.title('FAQ - Perguntas e respostas frequentes')
+        st.write("Caso não ache a resposta que procura, envie email para hermes@veritassanitas.com.br")
+        st.subheader('''
+        Qual a aplicação dessa ferramenta?
+        ''')
         st.text('''
-            Qual a aplicação dessa ferramenta?
-                Esta ferramenta possibilita que o médico, enfermeiro ou residente possua um auxílio na identificação de tumores cerebrais.
-                
-            Como saber se o algoritmo realmente é inteligente?
-                Sim! Utilizamos métodos matemáticos baseados em análises de imagem!
-                
-            O algoritmo está preparado para quais tipos e formatos de imagens?
-                Atualmente 
-            O projeto está preparado para verificar tumores de qualquer imagem de cérebros?
-                a
-            Qualquer etnia, sexo, idade e características são atendidas para este projeto?
-                a
-            Esse algoritmo atende imagens de outras partes do corpo?
-                a
-            O projeto será expandido para outras área da medicina ou na área veterinária?
-                a
+        Esta ferramenta possibilita que o médico, enfermeiro ou residente possua um auxílio na identificação de tumores cerebrais.
+        ''')
+        st.subheader('''
+        Como saber se o algoritmo realmente é inteligente?
+        ''')
+        st.text('''
+        Utilizamos métodos matemáticos baseados em análises de imagem para garantir resultados reais e acertivos!
+        ''')
+        st.subheader('''
+        O algoritmo está preparado para quais tipos e formatos de imagens?
+        ''')
+        st.text('''
+            
+        ''')
+        st.subheader('''
+        O projeto está preparado para verificar tumores de qualquer imagem de cérebros?
+        ''')
+        st.text('''
+        Atualmente o modelo utilizado para verificação é proveniente de ressonância magnética (RMI).
+        ''')
+        st.subheader('''
+        Qualquer etnia, sexo, idade e características são atendidas para este projeto? 
+        ''')
+        st.text('''
+        Sim, atualmente nosso conjunto de imagens e dados permite que qualquer tipo de cérebro seja diagnosticado, desde que seja humano.
+        ''')
+        st.subheader('''
+        Esse algoritmo atende imagens de outras partes do corpo?    
+        ''')
+        st.text('''
+        Sim, porém ainda não possuímos amostras de imagens para outras partes do corpo. Poderão ser necessários ajustes para tornar o sistema especialista para a parte do corpo escolhida e um conjunto de imagens selecionadas para que a máquina possa aprender da maneira correta.
+        ''')
+        st.subheader('''
+        O projeto será expandido para outras área da medicina ou na área veterinária?
+        ''')
+        st.text('''
+        Uma vez que o algoritmo funciona corretamente, basta ter imagens selecionadas de maneira correta, seguindo os mesmos padrões utilizados anteriormente por nossa equipe.
+        ''')
+        st.text('''
+        
         ''')
     elif escolha == "Considerações":
         st.subheader('Considerações')
-        st.write("A equipe espera que este projeto possa ser usado em casos reais, auxiliando médicos, enfermeiros e pacientes em sua jornada.")
+        st.text('''
+        A equipe espera que este projeto possa ser usado em casos reais, auxiliando médicos, enfermeiros e pacientes em sua jornada.
+        Agradecemos seu apoio e tempo investidos ao acessar nosso projeto, esperamos que volte.
+        ''')
     else:
         st.subheader('About')
         st.write("Este projeto não foi carregado corretamente, tente recarregar a página ou esvazie seu cache do navegador.")
