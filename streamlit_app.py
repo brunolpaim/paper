@@ -18,48 +18,62 @@ def main():
     st.title("PROJETO I – APLICAÇÃO DE MÉTODOS DE APRENDIZAGEM DE LINGUAGEM DE MÁQUINA")
 
     menu = ["Apresentação","Modelo 0 - Comparador de Imagens", "Modelo I - Machine Learning", "Modelo II - Machine Learning", "FAQ", "Considerações"]
-    escolha = st.sidebar.selectbox("Menu", menu)
+    escolha = st.sidebar.selectbox("Menu Principal", menu)
 
     if escolha == "Apresentação":
         
-        st.title('EQUIPE 10')
-        st.text('''
+        st.header('EQUIPE 10')
+        st.subheader('''
             Bruno Lopes Paim (3140116) (brunolpaim@gmail.com):
-            Programação Fullstack (backend + frontend website)
-            
+        ''')
+        st.text('''
+                Programação Fullstack (backend colab, backend github + frontend website + P&D)
+        ''')
+        st.subheader('''
             John Erick Bento de Godoi dos Santos (3121508) (jhonerick111@gmail.com):
-            Programação Fullstack (frontend webframework)
-            
+        ''')
+        st.text('''
+            Programação Fullstack (frontend webframework + P&D)
+        ''') 
+        st.subheader('''
             Joaby Rodrigues da Silva (3093586) (joabyanalistadedados3@gmail.com):
-            Análise de dados, busca de datasets
-            
+        ''')
+        st.text('''
+                Análise de dados, busca de datasets, conversão de imagens
+        ''')
+        st.subheader('''
             João Ricardo Castro Melo (3127198) (joaorcm@gmail.com):
-            Documentação, classificação de imagens, historytellig
-            
+        ''')
+        st.text('''
+                Documentação, classificação de imagens, historytellig
+        ''')
+        st.subheader('''
             Marcus Vinicius Começanha Silva (3613343) (mavincom@gmail.com):
-            Documentação, Gerenciamento de tempo e tarefas, historytelling
+        ''')
+        st.text('''
+                Documentação, Gerenciamento de tempo e tarefas, historytelling
         ''')
         
-        st.image('meme.png', caption='Legenda: "Como o cerebro de um dev funciona" ')
+        st.image('meme.png', caption='Legenda: "Meme de como o cerebro de um dev funciona."(risos) ')
            
     elif escolha == "Modelo 0 - Comparador de Imagens":
 
         st.header('Comparador de imagens por histogramas e distância de Bhattacharyya')
         st.subheader('Introdução')
         st.text('''
-              Esta aplicação analisa e compara imagens para auxiliar nas comparações de exames 
-              médicos e é baseada no mecanismo semelhante ao do olho humano, com identificação 
-              por cores, iluminação e saturação.
-              
-              Esse método específico foi pensado para que seja possível simular o mesmo que 
-              um humano normal pode identificar, além de auxiliar médicos que tenham deficiências visuais.
-              
-              O método utlizado consiste em transformar os dados de imagens em cores para imagens
-              em escala de preto e branco, dessa forma a máquina aumenta o grau de precisão para 
-              análise de tumores identificáveis.
-              
-              Isto simplifica a comparação pois trabalha apenas com variações de tons de cinza e então 
-              as imagens são então comparadas usando o método "distância de Bhattacharyya".              
+          Esta aplicação analisa e compara imagens para auxiliar nas comparações de exames 
+          médicos e é baseada no mecanismo semelhante ao do olho humano, com identificação 
+          por cores, iluminação e saturação.
+
+          Esse método específico foi pensado para que seja possível simular o mesmo que 
+          um humano normal pode identificar, além de auxiliar médicos que tenham deficiências visuais.
+
+          O método utlizado consiste em transformar os dados de imagens em cores para imagens
+          em escala de preto e branco, dessa forma a máquina aumenta o grau de precisão para 
+          análise de tumores identificáveis.
+
+          Isto simplifica a comparação pois trabalha apenas com variações de tons de cinza e então 
+          as imagens são então comparadas usando o método "distância de Bhattacharyya".              
             ''')
 
         st.subheader('Uso da aplicação')
@@ -219,7 +233,7 @@ def main():
         st.write("Caso o valor seja próximo a 0.0 pode-se considerar as imagens iguais!\nQuanto mais próximo de 1, menor a relação.\n\n Resultado: {0:.2f}\n".format(metric_val))
 
     elif escolha == "Modelo I - Machine Learning":
-        st.title('ENTREGAS DA ETAPA I')
+        st.title('Modelo I - Machine Learning')
         st.subheader('DEFINIÇÃO DO TEMA: Área de Medicina – Neurologia')
         st.subheader('OBJETIVO: Auxílio no Diagnóstico por Imagem de Tumores Cerebrais')
         st.subheader('ESPECIFICAÇÃO:')
@@ -241,7 +255,7 @@ def main():
             A ressonância magnética também pode ajudar os médicos
             a procurar causas de dores de cabeça ou convulsões.
         ''')
-        st.subheader('- ESPECIFICAÇÃO TÉCNICA:')
+        st.subheader('ESPECIFICAÇÃO TÉCNICA:')
         st.text('''
             Utilização do Algorítimo de “Bhattacharyya distance”
             (Codificado na linguagem de programação Python, com método supervisionado),
@@ -400,7 +414,7 @@ def main():
         
         st.text('''
             Amostragem: Esse código serve para definirmos o gráfico de imagens que queremos
-            exibir de amostra, no caso uma grade 3x3.''')
+            exibir de amostra, neste caso, uma grade 3x3.''')
         
         sampling = '''->
             def plot_dataset(dataset):
