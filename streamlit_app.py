@@ -68,6 +68,7 @@ def main():
         st.header('Comparador de imagens por histogramas e distância de Bhattacharyya')
         st.subheader('Introdução')
         st.text('''
+        
             Esta aplicação analisa e compara imagens para auxiliar nas comparações de exames 
             médicos e é baseada no mecanismo semelhante ao do olho humano, com identificação 
             por cores, iluminação e saturação.
@@ -81,11 +82,13 @@ def main():
             precisão para análise de tumores visualmente identificáveis.
 
             Este cálculo simplifica a comparação pois trabalha apenas com variações de tons 
-            de cinza e então as imagens são comparadas usando "distância de Bhattacharyya".              
+            de cinza e então as imagens são comparadas usando "distância de Bhattacharyya".  
+            
             ''')
 
         st.subheader('Uso da aplicação')
         st.text('''
+        
             A aplicação aguarda até 5 minutos para que sejam preenchidas as imagens 1 e 2 a serem comparadas.
             Vide os botões de inserção de imagens mais abaixo na página.
 
@@ -95,6 +98,7 @@ def main():
             cv::cvtColor() da biblioteca OpenCV (opencv-python-headless==4.6.0.66).
 
             É usado o argumento COLOR_BGR2GRAY para especificar que converteremos em preto e branco.
+            
             ''')
 
         parte1 = '''
@@ -106,6 +110,7 @@ def main():
 
         st.subheader('O que é um Histograma?')
         st.text('''
+        
             Um histograma de uma imagem é um vetor (ou lista) de incidência de valores individuais 
             medido em pixels, ou seja, para cada valor possível que um pixel possa assumir,
             valores individuais de pixels, ou seja, para cada valor possível que um pixel pode assumir,
@@ -116,9 +121,11 @@ def main():
             enquanto que os mais escuros estarão no início. 
             
             Observe a imagem a seguir:
+            
         ''')
         st.image('exemploHistograma.png', caption='Exemplo de histograma de imagem em P&B.')
         st.text('''
+        
             O cálculo do histograma varre cada pixel e vê seu valor, acumulando
             na posição correspondente do vetor quantas vezes aquela determinada cor aparece.
             
@@ -131,10 +138,12 @@ def main():
             de custo computacional muito mais baixo do que comparar imagens pixel a pixel.
             Outra vantagem de comparar histogramas é superar o deslocamento dentro de um fundo
             escuro, não sendo necessário que as feições das imagens estejam perfeitamente alinhadas.
+            
         ''')
 
         st.subheader('Calcular histogramas dá certo?')
         st.text('''
+        
             Considerando que esta é uma operação destrutiva, a chance de duas imagens diferentes
             gerar histogramas similares é baixíssima, isto faz a eficácia aumentar. 
             
@@ -148,18 +157,22 @@ def main():
             (há uma maior quantidade de valores "mais claros" quando vemos tumores).
             Em termos de código, utilizamos a função calcHist() da bilbioteca OpenCV,
             além da função normalize() para superar diferenças de tamanho e aspecto.
+            
         ''')
 
         parte2 = '''
-        hist_img1 = cv2.calcHist([img1_gray], [0], None, [256], [0,256])
-        cv2.normalize(hist_img1, hist_img1, alpha=0, beta=1, norm_type=cv2.NORM_MINMAX);
-        hist_img2 = cv2.calcHist([img2_gray], [0], None, [256], [0,256])
-        cv2.normalize(hist_img2, hist_img2, alpha=0, beta=1, norm_type=cv2.NORM_MINMAX);
+        
+            hist_img1 = cv2.calcHist([img1_gray], [0], None, [256], [0,256])
+            cv2.normalize(hist_img1, hist_img1, alpha=0, beta=1, norm_type=cv2.NORM_MINMAX);
+            hist_img2 = cv2.calcHist([img2_gray], [0], None, [256], [0,256])
+            cv2.normalize(hist_img2, hist_img2, alpha=0, beta=1, norm_type=cv2.NORM_MINMAX);
+            
         '''
         st.code(parte2, language='python')
         #Encontra o valor pela distância de Bhattacharyya
         st.subheader('A distância de Bhattacharyya:')
         st.text('''
+        
             O OpenCV tem um método nativo para comparação de histogramas, o cv::compareHist().
             Este possui três argumentos:
             1 -> Primeiro histograma,
@@ -172,6 +185,7 @@ def main():
             O coeficiente de Bhattacharyya mede a quantidade de sobreposição entre duas amostras
             estatísticas ou populações. O resultado do cálculo é 1 para uma correspondência completa
             e 0 para uma incompatibilidade completa.
+            
         ''')
 
         final = '''
@@ -226,8 +240,6 @@ def main():
                 ph.metric("Por favor insira as imagens.", f"{mm:02d}:{ss:02d}")
                 time.sleep(1)
 
-
-        
         img1_gray = cv2.cvtColor(img_array1, cv2.COLOR_BGR2GRAY)
         img2_gray = cv2.cvtColor(img_array2, cv2.COLOR_BGR2GRAY)
 
@@ -250,6 +262,7 @@ def main():
         st.subheader('OBJETIVO: Auxílio no Diagnóstico por Imagem de Tumores Cerebrais')
         st.subheader('ESPECIFICAÇÃO: Reconhecimento de tumores cerebrais através da análise de imagens.')
         st.text('''
+        
             Este projeto busca automatizar o reconhecimento de padrões através
             de machine learning, fazendo com que a rede neural convolucional consiga
             compreender as características de um cérebro com tumor,e futuramente em outra etapa do projeto, 
@@ -262,9 +275,11 @@ def main():
             como sangramento, inchaço, problemas com a forma como o cérebro se desenvolveu,
             tumores, infecções, danos causados por uma lesão ou acidente vascular cerebral (AVC),
             parasitas ou problemas de entupimento de vasos sanguíneos, convulsões.
+            
         ''')
         st.subheader('ESPECIFICAÇÃO TÉCNICA:')
         st.text('''
+        
             Codificado na linguagem de programação Python, utilizando machine learning 
             (aprendizagem de máquina), com método supervisionado, usando classificação e regressão,
             possuindo 9 camadas de aprendizagem para reconhecimento de imagens e seus padrões 
@@ -283,10 +298,12 @@ def main():
             
             Ao final da execução do projeto no Google Colab é possível ver amostragens dos resultados,
             demonstrando a eficácia do projeto.
+            
         ''')
         
         st.title('O que é um modelo de predição?')
         st.text('''
+        
             O modelo de predição é uma função matemática que pode prever eventos futuros, ou seja,
             com eficiência consegue predizer com base em eventos passados a probabilidade de 
             ocorrerem novamente ao usar dados matemáticos, estatísticos e técnicas de Machine Learning.
@@ -303,15 +320,18 @@ def main():
 
             Parafraseando, pode-se dizer também que o modelo de predição usa dados do passado e
             do presente para conseguir descobrir dados do futuro.
+            
         ''')
         
         st.title('Início da execução do projeto')
         st.text('''
+        
             Estas linhas de código abaixo montam virtualmente as pastas de datasets do Google Drive
             dentro do Google Colab, como se fosse uma pasta local, isso faz com que evite a necessidade
             de fazer o upload a cada vez em que a instância de máquina virtual do Google Colab iniciar
             padar poder ser executado, economizando tempo e banda de internet, mantendo esses dados 
             sendo acessados de um datacenter para outro, ambos em nuvem.
+            
         ''')
         
         explicacao_colab = '''
@@ -321,6 +341,7 @@ def main():
         st.code(explicacao_colab, language='python')
         
         st.text('''
+        
             Instalando a biblioteca tensorflow.
 
             A lib python TensorFlow é também um Framework, ou seja, uma união de
@@ -333,24 +354,30 @@ def main():
             Ao contrário das bibliotecas Python tradicionais, para executar um código
             TensorFlow existem alguns detalhes específicos, bem como a abertura de 
             uma sessão. Atualemte é feita de forma automática a partir po Python (v3.6).
+            
         ''')
         
         tensorflowcode = '''
-        !pip install tensorflow
+        
+            !pip install tensorflow
+        
         '''
         st.code(tensorflowcode, language='python')
         
         st.text('Abaixo serão importadas as bibliotecas necessárias para o projeto')
         importsprjt = '''
+        
             import os
             import matplotlib.pyplot as plt 
             import tensorflow as tf
+            
         '''
         
         st.code(importsprjt, language='python')
         
         st.text('Criação da estrutura dos datasets a partir da estrutura de pastas e definindo as variáveis')
         data_structures = '''
+        
             dataset_dir = os.path.join(os.getcwd(),'/content/drive/MyDrive/PaperUniasselvi/TumoresCerebrais')
 
             dataset_train_dir = os.path.join(dataset_dir, 'treinamento')
@@ -366,6 +393,7 @@ def main():
 
             print('Validando identificação de cérebros saudáveis: %s' % dataset_validation_saudavel_len)
             print('Validando identificação de cérebros com tumor: %s' % dataset_validation_tumor_len)
+            
         '''
         
         st.code(data_structures, language='python')
@@ -373,6 +401,7 @@ def main():
         st.text('Abaixo estão sendo definidas os valores padrões para as imagens, o tamanho de amostragem, o número de epochs, ...')
         
         define_img_size = '''
+        
             image_width = 160
             image_height = 160
             image_color_channel = 3
@@ -385,11 +414,13 @@ def main():
             learning_rate = 0.0001
 
             class_names = ['saudavel','tumor']
+            
         '''
         
         st.code(define_img_size, language='python')
         
         st.text('''
+        
             Abaixo estão sendo definidos os datasets e suas respectivas variáveis,
             bem como habilitando o método "aleatório" (shuffle)
 
@@ -397,9 +428,11 @@ def main():
             presentes no dataset, fazendo assim que o treinamento seja
             baseado em amostras. Isso é importante para determinar
             se o método é válido com diferentes amostras.
+            
         ''')
         
         defined_datasets_variables = '''
+        
             dataset_train = tf.keras.preprocessing.image_dataset_from_directory(
                 dataset_train_dir,
                 image_size = image_size,
@@ -412,6 +445,7 @@ def main():
                 batch_size = batch_size,
                 shuffle = True
             )
+            
         '''
         st.code(defined_datasets_variables, language='python')
         
@@ -431,10 +465,13 @@ def main():
         st.code(cardinality, language='python')
         
         st.text('''
+        
             Amostragem: Esse código serve para definirmos o gráfico de imagens que queremos
-            exibir de amostra, neste caso, uma grade 3x3.''')
+            exibir de amostra, neste caso, uma grade 3x3.
+        ''')
         
         sampling = '''
+        
             def plot_dataset(dataset):
               plt.gcf().clear()
               plt.figure(figsize = (15,15))
@@ -446,27 +483,34 @@ def main():
 
                   plt.imshow(features[i].numpy().astype('uint8'))
                   plt.title(class_names[labels[i]])
+                  
         '''
         st.code(sampling, language='python')
         
         st.text('Amostragem de treinamento')
         
         sampling_training = '''
+        
             plot_dataset(dataset_train)
+            
         '''
         st.code(sampling_training, language='python')
         
         st.text('Amostragem de validaçao')
         
         sampling_validation = '''
+        
             plot_dataset(dataset_validation)
+            
         '''
         st.code(sampling_validation, language='python')
         
         st.text('Amostragem de teste')
                 
         sampling_test = '''
+        
             plot_dataset(dataset_test)
+            
         '''
         st.code(sampling_test, language='python')
         
@@ -501,8 +545,10 @@ def main():
         st.code(compilation_code, language='python')
         
         st.text('''
+        
             Amostra visual de como funcionam os "Epochs" dentro do modelo
             em função do tempo (histrograma dos epochs).
+            
         ''')
         
         epochs_hist = '''
@@ -516,6 +562,7 @@ def main():
         
         st.subheader('Como funciona um modelo de predição?')
         st.text('''
+        
             Coleta de dados: momento de obter a base de dados de modo fácil
             e organizado. É fundamental não ocorrer erros, pois isso compromete
             todo o resto do processo. Essa etapa serve para facilitar
@@ -529,11 +576,13 @@ def main():
             Validação de dados:
             depois de ter os dados processados, eles são monitorados e calibrados;
             são avaliados a qualidade, precisão e suficiência para ser adotado como modelo.
+            
         ''')
         
         st.text('Plotagem de modelos de predições')
         
         plot_predictions = '''
+        
             def plot_dataset_predictions(dataset):
               features, labels = dataset.as_numpy_iterator().next()
               predictions = model.predict_on_batch(features).flatten()
@@ -550,6 +599,7 @@ def main():
                 plt.axis('off')
                 plt.imshow(features[i].astype('uint8'))
                 plt.title(class_names[predictions[i]])
+                
         '''
         
         st.code(plot_predictions, language='python')
@@ -568,6 +618,7 @@ def main():
         st.subheader('OBJETIVO: Auxílio no Diagnóstico por Imagem de Tumores Cerebrais')
         st.subheader('ESPECIFICAÇÃO: Reconhecimento de tumores cerebrais através da análise de imagens.')
         st.text('''
+        
             Este projeto busca automatizar o reconhecimento de padrões através
             de machine learning, fazendo com que a rede neural convolucional consiga
             compreender as características de um cérebro com tumor,e futuramente em outra etapa do projeto, 
@@ -580,9 +631,11 @@ def main():
             como sangramento, inchaço, problemas com a forma como o cérebro se desenvolveu,
             tumores, infecções, danos causados por uma lesão ou acidente vascular cerebral (AVC),
             parasitas ou problemas de entupimento de vasos sanguíneos, convulsões.
+            
         ''')
         st.subheader('ESPECIFICAÇÃO TÉCNICA:')
         st.text('''
+        
             Codificado na linguagem de programação Python, utilizando machine learning 
             (aprendizagem de máquina), com método supervisionado, usando classificação e regressão,
             possuindo 12 camadas de aprendizagem para reconhecimento de imagens e seus padrões 
@@ -601,10 +654,12 @@ def main():
             
             Ao final da execução do projeto no Google Colab é possível ver amostragens dos resultados,
             demonstrando a eficácia do projeto.
+            
         ''')
         
         st.title('O que é um modelo de predição?')
         st.text('''
+        
             O modelo de predição é uma função matemática que pode prever eventos futuros, ou seja,
             com eficiência consegue predizer com base em eventos passados a probabilidade de 
             ocorrerem novamente ao usar dados matemáticos, estatísticos e técnicas de Machine Learning.
@@ -621,24 +676,30 @@ def main():
 
             Parafraseando, pode-se dizer também que o modelo de predição usa dados do passado e
             do presente para conseguir descobrir dados do futuro.
+            
         ''')
         
         st.title('Início da execução do projeto')
         st.text('''
+        
             Estas linhas de código abaixo montam virtualmente as pastas de datasets do Google Drive
             dentro do Google Colab, como se fosse uma pasta local, isso faz com que evite a necessidade
             de fazer o upload a cada vez em que a instância de máquina virtual do Google Colab iniciar
             padar poder ser executado, economizando tempo e banda de internet, mantendo esses dados 
             sendo acessados de um datacenter para outro, ambos em nuvem.
+            
         ''')
         
         explicacao_colab = '''
+        
         from google.colab import drive
         drive.mount('/content/drive/')
+        
         '''
         st.code(explicacao_colab, language='python')
         
         st.text('''
+        
             Instalando a biblioteca tensorflow.
 
             A lib python TensorFlow é também um Framework, ou seja, uma união de
@@ -651,6 +712,7 @@ def main():
             Ao contrário das bibliotecas Python tradicionais, para executar um código
             TensorFlow existem alguns detalhes específicos, bem como a abertura de 
             uma sessão. Atualemte é feita de forma automática a partir po Python (v3.6).
+            
         ''')
         
         tensorflowcode = '''
@@ -659,16 +721,20 @@ def main():
         st.code(tensorflowcode, language='python')
         
         st.text('Abaixo serão importadas as bibliotecas necessárias para o projeto')
+        
         importsprjt = '''
+        
             import os
             import matplotlib.pyplot as plt 
             import tensorflow as tf
+            
         '''
         
         st.code(importsprjt, language='python')
         
         st.text('Criação da estrutura dos datasets a partir da estrutura de pastas e definindo as variáveis')
         data_structures = '''
+        
             dataset_dir = os.path.join(os.getcwd(),'/content/drive/MyDrive/PaperUniasselvi/TumoresCerebrais')
 
             dataset_train_dir = os.path.join(dataset_dir, 'treinamento')
@@ -684,6 +750,7 @@ def main():
 
             print('Validando identificação de cérebros saudáveis: %s' % dataset_validation_saudavel_len)
             print('Validando identificação de cérebros com tumor: %s' % dataset_validation_tumor_len)
+            
         '''
         
         st.code(data_structures, language='python')
@@ -691,6 +758,7 @@ def main():
         st.text('Abaixo estão sendo definidas os valores padrões para as imagens, o tamanho de amostragem, o número de epochs, ...')
         
         define_img_size = '''
+        
             image_width = 160
             image_height = 160
             image_color_channel = 3
@@ -703,11 +771,13 @@ def main():
             learning_rate = 0.0001
 
             class_names = ['saudavel','tumor']
+            
         '''
         
         st.code(define_img_size, language='python')
         
         st.text('''
+        
             Abaixo estão sendo definidos os datasets e suas respectivas variáveis,
             bem como habilitando o método "aleatório" (shuffle)
 
@@ -715,9 +785,11 @@ def main():
             presentes no dataset, fazendo assim que o treinamento seja
             baseado em amostras. Isso é importante para determinar
             se o método é válido com diferentes amostras.
+            
         ''')
         
         defined_datasets_variables = '''
+        
             dataset_train = tf.keras.preprocessing.image_dataset_from_directory(
                 dataset_train_dir,
                 image_size = image_size,
@@ -736,6 +808,7 @@ def main():
         st.text('Adicionando o método de cardinalidade por amostragem')
         
         cardinality = '''
+        
             dataset_validation_cardinality = tf.data.experimental.cardinality(dataset_validation)
             dataset_validation_batches = dataset_validation_cardinality // 5
 
@@ -791,24 +864,23 @@ def main():
         st.text('Criação do modelo e compilação do mesmo.')
         
         compilation_code = '''
-            model = tf.keras.models.Sequential([
-            tf.keras.layers.experimental.preprocessing.Rescaling(
+        model = tf.keras.models.Sequential([
+                tf.keras.layers.experimental.preprocessing.Rescaling(
                     1. / image_color_channel_size,
                     input_shape = image_shape
-                ),
-
-                tf.keras.layers.Conv2D(32, (3, 3), padding='same', input_shape=x_train.shape[1:],activation('relu')))
-                tf.keras.layers.Conv2D(32,(3, 3),activation('relu'))
-                tf.keras.layers.MaxPooling2D(pool_size=(2, 2))
-                tf.keras.layers.Dropout(0.25)
-                tf.keras.layers.Conv2D(64, (3, 3), padding='same',activation('relu'))
-                tf.keras.layers.Conv2D(64, (3,3),activation('relu'))
-                tf.keras.layers.MaxPooling2D(pool_size=(2, 2))
-                tf.keras.layers.Dropout(0.25)
-                tf.keras.layers.Flatten()
-                tf.keras.layers.Dense(32,activation('relu'))
-                tf.keras.layers.Dropout(0.5)
-                tf.keras.layers.Dense(density,activation('softmax'))
+                ),    
+                tf.keras.layers.Conv2D(32, (3, 3), padding='same', activation = 'relu'),
+                tf.keras.layers.Conv2D(32,(3, 3), activation = 'relu'),
+                tf.keras.layers.MaxPooling2D(pool_size=(2, 2)),
+                tf.keras.layers.Dropout(0.25),
+                tf.keras.layers.Conv2D(64, (3, 3), padding='same', activation = 'relu'),
+                tf.keras.layers.Conv2D(64, (3,3), activation = 'relu'),
+                tf.keras.layers.MaxPooling2D(pool_size=(2, 2)),
+                tf.keras.layers.Dropout(0.25),
+                tf.keras.layers.Flatten(),
+                tf.keras.layers.Dense(32, activation = 'relu'),
+                tf.keras.layers.Dropout(0.5),
+                tf.keras.layers.Dense(32, activation = 'softmax')
             ])
 
             model.compile(
@@ -818,6 +890,7 @@ def main():
             )
 
             model.summary()
+
         '''
         
         st.code(compilation_code, language='python')
