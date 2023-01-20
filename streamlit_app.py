@@ -975,7 +975,7 @@ def main():
         O algoritmo está preparado para quais tipos e formatos de imagens?
         ''')
         st.text('''
-            
+        Atualmente o projeto recebe por padrão *.jpg, *.png e formatos similares. Outros formatos podem funcionar, mas não garantimos a eficácia dos mesmos.
         ''')
         st.subheader('''
         O projeto está preparado para verificar tumores de qualquer imagem de cérebros?
