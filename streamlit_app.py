@@ -15,7 +15,7 @@ def load_image2(up_streamlit_img2):
     return img2
 
 def main():
-    st.title("PROJETO I – APLICAÇÃO DE MÉTODOS DE APRENDIZAGEM DE LINGUAGEM DE MÁQUINA")
+    st.title("PROJETO II – APLICAÇÃO DE MÉTODOS DE APRENDIZAGEM DE LINGUAGEM DE MÁQUINA")
 
     menu = ["Apresentação","Modelo 0 - Comparador de Imagens", "Modelo I - Machine Learning", "Modelo II - Machine Learning", "Modelo III - Machine Learning", "FAQ", "Considerações"]
     escolha = st.sidebar.selectbox("Menu Principal", menu)
